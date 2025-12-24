@@ -100,11 +100,11 @@ public static class BossPowerPatches
 	[HarmonyPatch(typeof(SEMan), nameof(SEMan.ModifySneakStaminaUsage))]
 	private class SEManModifyStaminaSneakUsage
 	{
+		[UsedImplicitly]
 		private static void Postfix(SEMan __instance, float baseStaminaUse, ref float staminaUse)
 		{
 			// staminaUse is the final value to deplete to the stamina player
-			var sneakBonus = StaminaSneakUsage.Total();
-			if (__instance.m_character.IsSneaking() && sneakBonus != 0)
+			if (__instance.m_character.IsSneaking())
 			{
 				staminaUse -= staminaUse * StaminaSneakUsage.Total() / 100f;
 			}
@@ -257,9 +257,10 @@ public static class BossPowerPatches
 	private static class ModifyStagger
 	{
 		[UsedImplicitly]
-		public static void Prefix(float baseValue, ref float use)
+		public static void Postfix(float baseValue, ref float use)
 		{
-			use = 1 + StaggerResist.Total() * -1 / 100f;
+			// use is the final value to the stagger
+			use -= use * StaggerResist.Total() / 100f;
 		}
 	}
 	
