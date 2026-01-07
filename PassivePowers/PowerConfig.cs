@@ -241,7 +241,7 @@ public class BonusSpiritDefense(int active, int passive): PowerConfig<int, Bonus
 [UsedImplicitly]
 public class StaminaSneakUsage(int active, int passive): PowerConfig<int, StaminaSneakUsage>(active, passive)
 {
-	public override string Modifier => "Stamina Snake Usage";
+	public override string Modifier => "Stamina Sneak Usage";
 	public override string Desc => "$powers_sneak_stamina_reduction";
 	public override string Unit => "% bonus";
 }
